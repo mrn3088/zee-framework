@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-type HandleFunc func(w http.ResponseWriter, r *http.Request)
+type HandleFunc func(ctx *Context)
 
 type server interface {
 	http.Handler
@@ -93,8 +93,11 @@ func (h *HTTPServer) ServeHTTP(w http.ResponseWriter, request *http.Request) {
 		_, _ = w.Write([]byte("404 NOT FOUND"))
 		return
 	}
+	// 2. construct Context
+	c := NewContext(w, request)
+	fmt.Printf("request %s - %s \n", c.Method, c.Pattern)
 	// 2. send request
-	handler(w, request)
+	handler(c)
 }
 
 // Start to start service

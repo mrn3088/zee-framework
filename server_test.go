@@ -21,12 +21,12 @@ func TestHTTP_Start(t *testing.T) {
 	}
 }
 
-func Login(w http.ResponseWriter, r *http.Request) {
-	_, _ = w.Write([]byte("login success!"))
+func Login(ctx *Context) {
+	_, _ = ctx.response.Write([]byte("login success!"))
 }
 
-func Register(w http.ResponseWriter, r *http.Request) {
-	_, _ = w.Write([]byte("register success!"))
+func Register(ctx *Context) {
+	_, _ = ctx.response.Write([]byte("register success!"))
 }
 
 func TestHTTP_Start_Route(t *testing.T) {
