@@ -20,3 +20,22 @@ func TestHTTP_Start(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func Login(w http.ResponseWriter, r *http.Request) {
+	_, _ = w.Write([]byte("login success!"))
+}
+
+func Register(w http.ResponseWriter, r *http.Request) {
+	_, _ = w.Write([]byte("register success!"))
+}
+
+func TestHTTP_Start_Route(t *testing.T) {
+	h := NewHTTP()
+	h.GET("/login", Login)
+	h.POST("/register", Register)
+
+	err := h.Start(":8080")
+	if err != nil {
+		panic(err)
+	}
+}
