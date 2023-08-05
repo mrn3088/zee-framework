@@ -18,7 +18,10 @@ import (
 )
 
 func main() {
+	// engine
 	r := zee.New()
+
+	// add handlers
 	r.GET("/", func(w http.ResponseWriter, req *http.Request) {
 		fmt.Fprintf(w, "URL.Path = %q\n", req.URL.Path)
 	})
